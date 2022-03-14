@@ -23,14 +23,13 @@ Installatie web-app
 4) Start de web-app met het commando 'dotnet SysTeamHackatonWebApp.dll'
 5) De website zou nu moeten draaien op poort 80 en 443
 6) Schedule een job zodat iedere minuut de pagina /monitor van de web-app wordt aangeroepen
-7) Om ook Pod informatie te kunnen tonen op de webpagina moeten er enkele omgevingsvariabelen worden gezet bij een deployment in een Kubernetes cluster:
-   MY_NODE_NAME =  spec.nodeName
-   MY_POD_NAME = metadata.name
-   MY_POD_NAMESPACE = metadata.namespace
-   MY_POD_IP = status.podIP
-   MY_POD_SERVICE_ACCOUNT = spec.serviceAccountName
-   (zie ook https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/)
-
+7) Om ook Pod informatie te kunnen tonen op de webpagina moeten er enkele omgevingsvariabelen worden gezet bij een deployment in een Kubernetes cluster. (zie ook https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/):
+   - MY_NODE_NAME =  spec.nodeName
+   - MY_POD_NAME = metadata.name
+   - MY_POD_NAMESPACE = metadata.namespace
+   - MY_POD_IP = status.podIP
+   - MY_POD_SERVICE_ACCOUNT = spec.serviceAccountName
+   
 Installatie database
 --------------------
 1) Base image: mcr.microsoft.com/mssql/server:2019-latest
