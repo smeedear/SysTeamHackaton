@@ -38,7 +38,7 @@ GO
 IF (NOT EXISTS (SELECT * FROM [sys].[syslogins] WHERE [loginname]='systeam-hackaton-user')) AND (DB_ID('systeam-hackaton-db') IS NOT NULL)
 BEGIN
 	PRINT N'--CREATE LOGIN';
-	CREATE LOGIN [systeam-hackaton-user] WITH PASSWORD=N'SysTeam2@22!', DEFAULT_DATABASE=[systeam-hackaton-db], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+	CREATE LOGIN [systeam-hackaton-user] WITH PASSWORD=N'{{PASSWORD}}', DEFAULT_DATABASE=[systeam-hackaton-db], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
 END
 GO
 

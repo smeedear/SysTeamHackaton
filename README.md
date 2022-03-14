@@ -2,10 +2,10 @@
 
 Een eenvoudige web-app + database ontwikkeld in .NET 6 en MSSQL 2019 t.b.v. de hackaton van het KOOP System Team. 
 De web-app bevat vier pagina's;
-- Default page: Toont de status en enkele metrieken van de container en de pod
-- History metrics: Haalt het CPU en Memory verbruik van de container op uit de database en toont deze in een grafiek
-- Monitor: Een pagina die periodiek aangeroepen dient te worden en het CPU en Memory verbruik op dat moment wegschrijft naar de database
-- Health: Geeft de 'health' van de web-app terug incl. een corresponderende http response code:
+- /: Toont de status en enkele metrieken van de container en de pod
+- /history: Haalt het CPU en Memory verbruik van de container op uit de database en toont deze in een grafiek
+- /monitor: Een pagina die periodiek aangeroepen dient te worden en het CPU en Memory verbruik op dat moment wegschrijft naar de database
+- /health: Geeft de 'health' van de web-app terug in json formaat incl. een corresponderende http response code. De health status kan worden gemanipuleerd m.b.v. de tabel HealthStatus in de database.
   * Healthy; http 200
   * Unhealthy: http 503
 
@@ -20,10 +20,11 @@ Installatie web-app
    - lsb-release
    - procps
 3) Plaats de gehele inhoud van de directory WebApp in de linux omgeving
-4) Start de web-app met het commando 'dotnet SysTeamHackatonWebApp.dll'
-5) De website zou nu moeten draaien op poort 80 en 443
-6) Schedule een job zodat iedere minuut de pagina /monitor van de web-app wordt aangeroepen
-7) Om ook Pod informatie te kunnen tonen op de webpagina moeten er enkele omgevingsvariabelen worden gezet bij een deployment in een Kubernetes cluster. (zie ook https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/):
+4) Pas de connection-string naar de MSSQL database aan in appsettings.json. Vervang hierbij ook de string {{PASSWORD}} door het juiste wachtwoord van de user systeam-hackaton-user.
+5) Start de web-app met het commando 'dotnet SysTeamHackatonWebApp.dll'
+6) De website zou nu moeten draaien op poort 80 en 443
+7) Schedule een job zodat iedere minuut de pagina '/monitor' van de web-app wordt aangeroepen
+8) Om ook Pod informatie te kunnen tonen op de webpagina moeten er enkele omgevingsvariabelen worden gezet bij een deployment in een Kubernetes cluster (zie ook https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/):
    - MY_NODE_NAME =  spec.nodeName
    - MY_POD_NAME = metadata.name
    - MY_POD_NAMESPACE = metadata.namespace
@@ -34,4 +35,5 @@ Installatie database
 --------------------
 1) Base image: mcr.microsoft.com/mssql/server:2019-latest
    (zie ook https://hub.docker.com/_/microsoft-mssql-server)
-2) Draai het sql script DbCreate.sql om de database, login en user aan te maken in MSSQL.
+2) Vervang in het sql script DbCreate.sql {{PASSWORD}} door een wachtwoord voor de user systeam-hackaton-user
+3) Draai het sql script DbCreate.sql om de database, login en user aan te maken in MSSQL.
