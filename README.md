@@ -5,9 +5,9 @@ De web-app bevat vier pagina's;
 - Default page: Toont de status en enkele metrieken van de container en de pod
 - History metrics: Haalt het CPU en Memory verbruik van de container op uit de database en toont deze in een grafiek
 - Monitor: Een pagina die periodiek aangeroepen dient te worden en het CPU en Memory verbruik op dat moment wegschrijft naar de database
-- Health: Geeft de 'health' van de web-app terug incl. een corresponderende http response code
-          * Healthy; http 200
-		  * Unhealthy: http 503
+- Health: Geeft de 'health' van de web-app terug incl. een corresponderende http response code:
+  * Healthy; http 200
+  * Unhealthy: http 503
 
 Zowel de web-app als de database hebben als target platform linux-x64.
 
