@@ -99,6 +99,21 @@ BEGIN
 END
 GO
 
+IF object_id('HealthStatus', 'U') IS NULL
+BEGIN
+	PRINT N'--CREATE TABLE HealthStatus';
+	CREATE TABLE [dbo].[HealthStatus](
+		[Id] [int] IDENTITY(1,1) NOT NULL,
+		[Machinename] [nvarchar](60) NOT NULL,
+		[Status] [nvarchar](10) NOT NULL,
+	 CONSTRAINT [PK_HealthStatus] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+END
+GO
+
 PRINT N'--INSERT TESTDATA';
 INSERT INTO [dbo].[CpuUsage] ([Machinename], [Timestamp],[Usage]) VALUES ('Testdata', DATEADD(minute,-20,GETDATE()), 45)
 INSERT INTO [dbo].[CpuUsage] ([Machinename], [Timestamp],[Usage]) VALUES ('Testdata', DATEADD(minute,-19,GETDATE()), 60)

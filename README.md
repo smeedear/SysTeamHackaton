@@ -1,10 +1,13 @@
 # SysTeamHackaton
 
 Een eenvoudige web-app + database ontwikkeld in .NET 6 en MSSQL 2019 t.b.v. de hackaton van het KOOP System Team. 
-De web-app bevat drie pagina's;
+De web-app bevat vier pagina's;
 - Default page: Toont de status en enkele metrieken van de container en de pod
 - History metrics: Haalt het CPU en Memory verbruik van de container op uit de database en toont deze in een grafiek
 - Monitor: Een pagina die periodiek aangeroepen dient te worden en het CPU en Memory verbruik op dat moment wegschrijft naar de database
+- Health: Geeft de 'health' van de web-app terug incl. een corresponderende http response code
+          * Healthy; http 200
+		  * Unhealthy: http 503
 
 Zowel de web-app als de database hebben als target platform linux-x64.
 
@@ -18,7 +21,7 @@ Installatie web-app
    - procps
 3) Plaats de gehele inhoud van de directory WebApp in de linux omgeving
 4) Start de web-app met het commando 'dotnet SysTeamHackatonWebApp.dll'
-5) De website zou nu moeten draaien op poort 80
+5) De website zou nu moeten draaien op poort 80 en 443
 6) Schedule een job zodat iedere minuut de pagina /monitor van de web-app wordt aangeroepen
 7) Om ook Pod informatie te kunnen tonen op de webpagina moeten er enkele omgevingsvariabelen worden gezet bij een deployment in een Kubernetes cluster:
    MY_NODE_NAME =  spec.nodeName
