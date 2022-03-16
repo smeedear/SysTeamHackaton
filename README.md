@@ -20,7 +20,7 @@ Installatie web-app
    - lsb-release
    - procps
 3) Plaats de gehele inhoud van de directory WebApp in de linux omgeving
-4) Pas de connection-string naar de MSSQL database aan in appsettings.json. Vervang hierbij ook de string {{PASSWORD}} door het juiste wachtwoord van de user systeam-hackaton-user.
+4) Pas de connection-string naar de MSSQL database aan in appsettings.json. Vervang hierbij ook de strings {{DATABASE_ADDRESS}} en {{DATABASE_PASSWORD}} door het juiste adres van de database en het wachtwoord van de user systeam-hackaton-user. Een andere optie is om omgevingsvariabelen te zetten voor DATABASE_ADDRESS en DATABASE_PASSWORD, de webapp zorgt er dan voor dat deze waarden 'at runtime' worden vervangen in de connection-string.
 5) Start de web-app met het commando 'dotnet SysTeamHackatonWebApp.dll'
 6) De website zou nu moeten draaien op poort 80 en 443
 7) Schedule een job zodat iedere minuut de pagina '/monitor' van de web-app wordt aangeroepen
@@ -35,5 +35,5 @@ Installatie database
 --------------------
 1) Base image: mcr.microsoft.com/mssql/server:2019-latest
    (zie ook https://hub.docker.com/_/microsoft-mssql-server)
-2) Vervang in het sql script DbCreate.sql {{PASSWORD}} door een wachtwoord voor de user systeam-hackaton-user
+2) Vervang in het sql script DbCreate.sql {{DATABASE_PASSWORD}} door een wachtwoord voor de user systeam-hackaton-user
 3) Draai het sql script DbCreate.sql om de database, login en user aan te maken in MSSQL.

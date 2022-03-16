@@ -38,7 +38,7 @@ GO
 IF (NOT EXISTS (SELECT * FROM [sys].[syslogins] WHERE [loginname]='systeam-hackaton-user')) AND (DB_ID('systeam-hackaton-db') IS NOT NULL)
 BEGIN
 	PRINT N'--CREATE LOGIN';
-	CREATE LOGIN [systeam-hackaton-user] WITH PASSWORD=N'{{PASSWORD}}', DEFAULT_DATABASE=[systeam-hackaton-db], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+	CREATE LOGIN [systeam-hackaton-user] WITH PASSWORD=N'{{DATABASE_PASSWORD}}', DEFAULT_DATABASE=[systeam-hackaton-db], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
 END
 GO
 
@@ -114,6 +114,15 @@ BEGIN
 END
 GO
 
+IF object_id('Version', 'U') IS NULL
+BEGIN
+	PRINT N'--CREATE TABLE Version';
+    CREATE TABLE [dbo].[Version](
+	   [Version] [nvarchar](10) NOT NULL
+    ) ON [PRIMARY]
+END
+GO
+
 PRINT N'--INSERT TESTDATA';
 INSERT INTO [dbo].[CpuUsage] ([Machinename], [Timestamp],[Usage]) VALUES ('Testdata', DATEADD(minute,-20,GETDATE()), 45)
 INSERT INTO [dbo].[CpuUsage] ([Machinename], [Timestamp],[Usage]) VALUES ('Testdata', DATEADD(minute,-19,GETDATE()), 60)
@@ -157,4 +166,4 @@ INSERT INTO [dbo].[MemoryUsage] ([Machinename], [Timestamp],[Usage]) VALUES ('Te
 INSERT INTO [dbo].[MemoryUsage] ([Machinename], [Timestamp],[Usage]) VALUES ('Testdata', DATEADD(minute,-2,GETDATE()), 50)
 INSERT INTO [dbo].[MemoryUsage] ([Machinename], [Timestamp],[Usage]) VALUES ('Testdata', DATEADD(minute,-1,GETDATE()), 33)
 
-
+INSERT INTO [dbo].[Version] ([Version]) VALUES ('1.0.2')
